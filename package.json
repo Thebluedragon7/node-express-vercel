@@ -4,7 +4,7 @@
   "description": "node express testing",
   "main": "index.js",
   "engines": {
-    "node": "14.x"
+    "node": "v18.10.0"
   },
   "scripts": {
     "start": "node index.js",

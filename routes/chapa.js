@@ -5,7 +5,7 @@ const Chapa = require('chapa')
 
 let myChapa = new Chapa('CHASECK_TEST-MxHx9fSnnfX0WvvcE6VuknG9YHsF882D')
 
-
+router.use(cors())
 router.post("/", async (req, res, next) => {
     const requestData = req.body;
     let amount = requestData.amount??"100"

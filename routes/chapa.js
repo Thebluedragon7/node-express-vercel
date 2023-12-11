@@ -7,20 +7,28 @@ let myChapa = new Chapa('CHASECK_TEST-MxHx9fSnnfX0WvvcE6VuknG9YHsF882D')
 
 router.use(cors())
 router.post("/", async (req, res, next) => {
-    const requestData = req.body;
-    let amount = requestData.amount??"100"
-const customerInfo =  {
-    amount: amount,
-    currency: 'ETB',
-    email: 'abebe@bikila.com',
-    first_name: 'Abebe',
-    last_name: 'Bikila',
-    callback_url: 'https://chapa.co', // your callback URL
-    customization: {
-        title: 'I love e-commerce',
-        description: 'It is time to pay'
+    const { first_name,last_name,amount,email,phone_number,title,return_url,description} = req.body
+    const TEXT_REF = "tx-emwa12345" + Date.now()
+   console.log(req.body)
+
+
+    // form data
+    const customerInfo = {
+        amount: amount, 
+        currency: 'ETB',
+        email: email,
+        first_name: first_name,
+        last_name: last_name,
+        tx_ref: TEXT_REF,
+        callback_url: 'https://chapa.co', 
+        return_url: return_url + TEXT_REF,
+        phone_number:phone_number,
+        customization: {
+            title: title,
+            description: description
+        } 
     }
-}
+
 
 
 myChapa.initialize(customerInfo, { autoRef: true }).then(response => {
@@ -29,10 +37,16 @@ myChapa.initialize(customerInfo, { autoRef: true }).then(response => {
        response:response
       });
 
-}).catch(e => console.log(e)) // catch errors
-
-  
+}).catch(e => res.send(e))  
 });
+
+router.get("/verify-payment/:id",async(req,res,next)=>{
+    myChapa.verify('tx-myecommerce123451702279920874').then(response => {
+        return res.status(200).json({
+            response:response
+           });
+    }).catch(e => res.send(e))    
+})
 
 module.exports = router;
 

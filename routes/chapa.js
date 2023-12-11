@@ -9,7 +9,10 @@ router.use(cors())
 router.post("/", async (req, res, next) => {
     const { first_name,amount,email="",phone_number,title="",return_url,description=""} = req.body
     const TEXT_REF = "tx-emwa12345" + Date.now()
-   console.log(req.body)
+   
+   const url = return_url + "?tx_ref=" + TEXT_REF;
+   
+   
 
 
     // form data
@@ -21,7 +24,7 @@ router.post("/", async (req, res, next) => {
         last_name: first_name,
         tx_ref: TEXT_REF,
         callback_url: 'https://chapa.co', 
-        return_url: return_url + TEXT_REF,
+        return_url:encodeURIComponent(url).toString,
         phone_number:phone_number,
         customization: {
             title: title,
@@ -41,12 +44,17 @@ myChapa.initialize(customerInfo, { autoRef: true }).then(response => {
 });
 
 router.get("/verify-payment/:id",async(req,res,next)=>{
-    console.log(req.params.id)
+    
     myChapa.verify(req.params.id).then(response => {
         return res.status(200).json({
             response:response
            });
     }).catch(e => res.send(e))    
+})
+
+router.get("/test",async(req,res,next)=>{
+    
+   res.send("hi")
 })
 
 module.exports = router;

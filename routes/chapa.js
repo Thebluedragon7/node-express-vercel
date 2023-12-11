@@ -10,7 +10,7 @@ router.post("/", async (req, res, next) => {
     const { first_name,amount,email="",phone_number,title="",return_url,description=""} = req.body
     const TEXT_REF = "tx-emwa12345" + Date.now()
    
-   const url = return_url + "?tx_ref=" + TEXT_REF;
+   const url = return_url +TEXT_REF;
    
    
 

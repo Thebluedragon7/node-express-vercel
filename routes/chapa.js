@@ -7,7 +7,7 @@ let myChapa = new Chapa('CHASECK_TEST-MxHx9fSnnfX0WvvcE6VuknG9YHsF882D')
 
 router.use(cors())
 router.post("/", async (req, res, next) => {
-    const { first_name,last_name,amount,email,phone_number,title,return_url,description} = req.body
+    const { first_name,last_name="",amount,email="",phone_number,title="",return_url,description=""} = req.body
     const TEXT_REF = "tx-emwa12345" + Date.now()
    console.log(req.body)
 
@@ -41,7 +41,8 @@ myChapa.initialize(customerInfo, { autoRef: true }).then(response => {
 });
 
 router.get("/verify-payment/:id",async(req,res,next)=>{
-    myChapa.verify('tx-myecommerce123451702279920874').then(response => {
+    console.log(req.params.id)
+    myChapa.verify(req.params.id).then(response => {
         return res.status(200).json({
             response:response
            });

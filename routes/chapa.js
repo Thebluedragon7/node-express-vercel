@@ -7,7 +7,7 @@ let myChapa = new Chapa('CHASECK_TEST-MxHx9fSnnfX0WvvcE6VuknG9YHsF882D')
 
 router.use(cors())
 router.post("/", async (req, res, next) => {
-    const { first_name,last_name="",amount,email="",phone_number,title="",return_url,description=""} = req.body
+    const { first_name,amount,email="",phone_number,title="",return_url,description=""} = req.body
     const TEXT_REF = "tx-emwa12345" + Date.now()
    console.log(req.body)
 
@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
         currency: 'ETB',
         email: email,
         first_name: first_name,
-        last_name: last_name,
+        last_name: first_name,
         tx_ref: TEXT_REF,
         callback_url: 'https://chapa.co', 
         return_url: return_url + TEXT_REF,

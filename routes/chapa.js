@@ -24,7 +24,7 @@ router.post("/", async (req, res, next) => {
         last_name: first_name,
         tx_ref: TEXT_REF,
         callback_url: 'https://chapa.co', 
-        return_url:encodeURIComponent(url).toString,
+        return_url:url,
         phone_number:phone_number,
         customization: {
             title: title,

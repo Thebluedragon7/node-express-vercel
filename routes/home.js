@@ -91,27 +91,27 @@ ws.on("message", function incoming(data) {
     };
 })
 
-app.get('/', async (request, response) => {
+router.get('/', async (request, response) => {
     response.status(200).send("Welcome to the testing page");
 });
 
-app.get('/Console', async (request, response) => {
+router.get('/Console', async (request, response) => {
     response.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/Test', async (request, response) => {
+router.get('/Test', async (request, response) => {
     response.status(200).send("This is a test");
 });
 
-app.post('/message', async (request, response) => {
+router.post('/message', async (request, response) => {
     client.channels.cache.get(request.headers.channelid).send(request.headers.message);
 });
 
-app.get(`/grab-messages`, async (request, response) => {
+router.get(`/grab-messages`, async (request, response) => {
   response.status(200).send(ChatTables)
 })
 
-app.post(`/bot-body`, async (request, response) => {
+router.post(`/bot-body`, async (request, response) => {
   const headers = request.headers
   let channelid = headers.channelid
   let message = headers.message;
@@ -133,7 +133,7 @@ app.post(`/bot-body`, async (request, response) => {
   });
 })
 
-app.post(`/bot-body2`, async (request, response) => {
+router.post(`/bot-body2`, async (request, response) => {
   const headers = request.headers
   let channelid = headers.channelid
   let message = headers.message;
@@ -155,7 +155,7 @@ app.post(`/bot-body2`, async (request, response) => {
   });
 })
 
-app.post(`/webhook-body`, async (request, response) => {
+router.post(`/webhook-body`, async (request, response) => {
   const headers = request.headers
   let channelid = headers.channelid
   let message = headers.message;

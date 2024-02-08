@@ -314,11 +314,5 @@ const heartbeat = (ms) => {
         ws.send(JSON.stringify({ op: 1, d: null }))
     }, ms)
 }
-let listener = app.listen(Port, () => {
-    //ws.send(JSON.stringify({ op: 1, d: null }))
-    console.log(`Your app is currently listening on port: ${listener.address().port}`
-    );
-    //console.log(new Date())
-});
 
 module.exports = router;

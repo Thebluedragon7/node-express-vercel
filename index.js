@@ -64,7 +64,7 @@ ws.on("message", function incoming(data) {
                 console.log(d)
                 console.log(author + ": " + content)
             }
-        //console.log(ChatTables)
+        console.log(ChatTables)
     };
 })
 
@@ -75,29 +75,6 @@ client.on('ready', () => {
 
 ws.on("open", function open() {
     ws.send(JSON.stringify(payload))
-})
-
-ws.on("message", function incoming(data) {
-    let payload = JSON.parse(data)
-    const { t, event, op, d } = payload
-
-    switch (op) {
-        case 10:
-            const { heartbeat_interval } = d
-            interval = heartbeat(heartbeat_interval)
-            break;
-    };
-    switch (t) {
-        case "MESSAGE_CREATE":
-            let author = d.author.username;
-            if (d.author.bot !== true) {
-                let content = d.content;
-                ChatTables[d.id] = d
-                console.log(d)
-                console.log(author + ": " + content)
-            }
-        //console.log(ChatTables)
-    };
 })
 
 app.get('/', async (request, response) => {

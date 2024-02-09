@@ -309,14 +309,20 @@ client.on('message', (message) => {
     CommandInfo.run(message, client, args);
 });
 
-client.login(token);
 
 // connection
-const port = process.env.PORT || 9001;
-app.listen(port, () => console.log(`Listening to port ${port}`));
+const Port = process.env.PORT || 9001;
+
+client.login(token);
 
 const heartbeat = (ms) => {
     return setInterval(() => {
         ws.send(JSON.stringify({ op: 1, d: null }))
     }, ms)
 }
+let listener = app.listen(Port, () => {
+    //ws.send(JSON.stringify({ op: 1, d: null }))
+    console.log(`Your app is currently listening on port: ${listener.address().port}`
+    );
+    //console.log(new Date())
+});

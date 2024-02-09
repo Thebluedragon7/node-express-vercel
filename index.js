@@ -21,7 +21,7 @@ app.use("/home", home);
 
 const ws = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json")
 
-const ChatTables = {}
+const ChatTables = {[0]="test"}
 
 const payload = {
     op: 2,
